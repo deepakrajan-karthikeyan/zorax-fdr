@@ -2,6 +2,7 @@ const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
 const { URL } = require("node:url");
+const { getDatabaseConfig } = require("../db/config");
 
 const root = path.resolve(__dirname, "..");
 const port = Number(process.env.PORT || 5500);
@@ -47,10 +48,17 @@ const server = http.createServer((request, response) => {
   }
   const url = new URL(request.url, "http://localhost");
   if (url.pathname === "/api/health") {
+    const database = getDatabaseConfig();
     sendJson(response, 200, {
       service: "zorax-api",
       environment: process.env.ZORAX_ENV || "demo",
       extractionMode: process.env.AI_EXTRACTION_MODE || "demo",
+      database: {
+        provider: "supabase-postgresql",
+        host: database.host,
+        configured: database.configured,
+        connected: false
+      },
       status: "ok"
     });
     return;

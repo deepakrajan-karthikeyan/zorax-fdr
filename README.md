@@ -187,6 +187,23 @@ Then open `http://127.0.0.1:5500`. The API endpoints are:
 - `GET /api/health`
 - `GET /api/intelligence/capabilities`
 
+### Supabase configuration
+
+The project is prepared for the supplied Supabase PostgreSQL instance. Copy
+`.env.example` to `.env` in your local environment and set
+`SUPABASE_DB_PASSWORD` outside source control. The password is URL-encoded by
+`db/config.js` when a connection configuration is requested.
+
+The current Node demo server intentionally does not open a database connection;
+`GET /api/health` reports `configured: true` only when the password is present
+and always reports `connected: false` until a PostgreSQL client and migration
+runner are explicitly added. Apply [db/schema.sql](./db/schema.sql) through a
+trusted migration workflow before enabling persistence.
+
+Never put the real password in `.env.example`, frontend code, Git history, or
+the public repository. If the password contains special characters, provide it
+as the raw environment value; the helper handles URL encoding.
+
 Run the Python demo without installing dependencies:
 
 ```powershell
