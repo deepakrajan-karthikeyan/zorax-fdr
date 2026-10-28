@@ -1,0 +1,13 @@
+{
+  "name": "zorax-fdr",
+  "version": "0.2.0",
+  "private": true,
+  "description": "ZORAX FDR management portal with polyglot service examples",
+  "scripts": {
+    "start": "node api/server.js",
+    "check": "node --check app.js && node --check api/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

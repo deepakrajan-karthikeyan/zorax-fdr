@@ -149,7 +149,10 @@ These are intended outcomes and should be measured through prototype testing bef
 
 ## 🚀 Getting Started
 
-Setup instructions will depend on the implementation in this repository.
+This repository includes a browser-first demo plus small polyglot service examples.
+The extra language files are intentionally narrow and runnable: they document how
+the frontend can grow into a real service without pretending that production AI,
+bank, or database integrations already exist.
 
 Document the following as the application is developed:
 
@@ -160,6 +163,45 @@ Document the following as the application is developed:
 5. Frontend installation and startup.
 6. Test commands and demo data.
 7. Deployment instructions.
+
+### Polyglot project layout
+
+| File | Language | Purpose |
+|---|---|---|
+| `index.html`, `styles.css`, `app.js` | HTML/CSS/JavaScript | Existing interactive portal |
+| `api/server.js` | JavaScript (Node.js) | Static server and demo health/capability APIs |
+| `types/domain.ts` | TypeScript | Shared domain and extraction contracts |
+| `python/intelligence_worker.py` | Python | Dependency-free extraction, validation and audit-hash demo |
+| `db/schema.sql` | SQL/PostgreSQL | Institutions, instruments and audit-event schema |
+| `workers/deadline_worker.go` | Go | Priority-queue deadline worker example |
+| `config/workflow.json` | JSON | Workflow transitions and document policy |
+
+Run the browser and demo API with:
+
+```powershell
+npm start
+```
+
+Then open `http://127.0.0.1:5500`. The API endpoints are:
+
+- `GET /api/health`
+- `GET /api/intelligence/capabilities`
+
+Run the Python demo without installing dependencies:
+
+```powershell
+python python/intelligence_worker.py
+```
+
+Run the Go deadline example if Go is installed:
+
+```powershell
+go run workers/deadline_worker.go
+```
+
+The TypeScript file is a contract source and requires a TypeScript toolchain
+before it can be compiled. The SQL file targets PostgreSQL and should be applied
+through a migration process in a real deployment.
 
 Never commit API keys, passwords, production FDRs, or confidential institutional documents to GitHub.
 

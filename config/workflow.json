@@ -1,0 +1,19 @@
+{
+  "environment": "demo",
+  "timezone": "Asia/Kolkata",
+  "confidenceThreshold": 0.85,
+  "maturityReminderDays": [90, 60, 30, 7, 0],
+  "allowedTransitions": {
+    "SUBMITTED": ["VALIDATED"],
+    "VALIDATED": ["PENDING_VERIFICATION", "DISCREPANCY"],
+    "PENDING_VERIFICATION": ["VERIFIED", "DISCREPANCY"],
+    "VERIFIED": ["RENEWAL_PENDING", "RELEASE_APPROVED"],
+    "RENEWAL_PENDING": ["VERIFIED"],
+    "RELEASE_APPROVED": ["RELEASED"]
+  },
+  "documentPolicy": {
+    "maxBytes": 10485760,
+    "mimeTypes": ["application/pdf", "image/jpeg", "image/png"],
+    "privateStorage": true
+  }
+}
