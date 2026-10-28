@@ -1,210 +1,193 @@
-🏦 FDR Management Portal
-AI-Assisted Security Deposit & Fixed Deposit Receipt Lifecycle Management
-Team Zorax · Problem Statement ID: 26265
-A secure, centralized portal concept for managing institutional security
-deposits and Fixed Deposit Receipts (FDRs) across their administrative
-lifecycle---from submission and document review to maturity monitoring,
-renewal, and authorized release.
-> **Project status:** Prototype / proposed architecture. Update this
-> section to reflect which features are currently implemented, in
-> progress, or planned.
+
+# 🏦 FDR Management Portal
+### AI-Powered Security Deposit & Fixed Deposit Receipt Management
+
+**Team Zorax | Problem Statement ID: 26265**
+
+An intelligent, secure, and centralized portal designed to streamline the complete lifecycle of institutional security deposits and Fixed Deposit Receipts (FDRs) for AICTE-related approval and compliance processes.
 
 ---
-🚩 Problem Statement
-Institutions may need to submit or maintain security deposits and FDRs
-as part of approval and compliance processes. When records are spread
-across spreadsheets, emails, and physical documents, officials can face:
-Missing or inconsistent FDR information
-Time-consuming manual document review
-Missed maturity and renewal deadlines
-Limited visibility into pending verification and approval cases
-Difficulty tracking changes and maintaining a reliable audit history
-💡 Our Solution
-The FDR Management Portal brings institution-wise records, instrument
-metadata, supporting documents, verification status, deadline reminders,
-and release workflows into one role-controlled platform.
-Core Features
-Centralized FDR Repository --- Store institution and instrument
-records in one searchable system.
-Digital Document Upload --- Upload FDR PDFs or scans and
-associate them with structured records.
-AI-Assisted Document Extraction --- Use
-OCR/document-intelligence models to extract candidate fields such as
-bank name, FDR number, amount, issue date, and maturity date.
-Validation & Discrepancy Flags --- Check required fields, date
-consistency, and mismatches between extracted and submitted values.
-Human Review --- Route low-confidence extractions or
-discrepancies to an authorized reviewer.
-Maturity Monitoring --- Track approaching and overdue dates and
-generate configurable reminders.
-Renewal & Replacement Tracking --- Preserve the history of
-renewed or replacement instruments.
-Release/Refund Workflow --- Track requests, scrutiny, approval
-checkpoints, and final status.
-Dashboard & Reports --- Summarize active, expiring, matured,
-renewed, released, and pending instruments.
-Audit Trail & Access Control --- Record important actions and
-restrict functions according to user roles.
-🔄 Workflow
-An institution submits an FDR document and its details.
-The system preprocesses the document and extracts candidate
-metadata.
-Schema checks and business rules validate the submitted fields.
-Incomplete, inconsistent, or low-confidence records are sent for
-human review.
-Authorized officials verify instrument details through approved
-sources where available.
-The record is stored with its verification status and audit history.
-The maturity engine monitors deadlines and sends configured alerts.
-Renewal, replacement, or release requests move through the
-authorized workflow.
-Dashboards and reports show current status and pending actions.
-🧠 AI Models & Algorithms
----
-Model / Algorithm                   Purpose
----
-NVIDIA Nemotron document-parsing    Document layout and field
-model*                             extraction
-OCR (PaddleOCR or Tesseract)        Text extraction from scanned FDRs
-OpenCV preprocessing                Image cleanup and document-quality
-checks
-JSON Schema / Pydantic validation   Enforce structured metadata formats
-Rule-based validation               Check required fields, dates, and
-consistency
-Fuzzy matching (Levenshtein /       Flag possible text and reference
-Jaro-Winkler)                       mismatches
-Confidence-threshold routing        Send uncertain results for manual
-review
-Finite-State Machine (FSM)          Control permitted FDR lifecycle
-transitions
-Scheduled jobs / priority queues    Prioritize maturity reminders and
-overdue actions
-RAG + vector embeddings (optional)  Search approved regulations and
-guidance documents
-Cryptographic hash chaining         Make audit-log tampering detectable
-(optional)
-*Select the exact NVIDIA model and confirm its current availability,
-license, deployment requirements, and suitability before implementation.
-AI extraction supports review; it does not independently prove that
-an FDR is authentic.
-🧰 Proposed Technology Stack
----
-Layer                   Technologies            Responsibility
----
-Frontend                React, TypeScript,      Responsive dashboards
-Tailwind CSS            and role-specific
-screens
-Backend                 Python, FastAPI,        REST APIs, validation,
-Pydantic                and business logic
-Database                PostgreSQL              Institution records,
-FDR metadata, workflow
-states
-Document intelligence   NVIDIA document model   Document parsing and
-and/or                  preprocessing
-PaddleOCR/Tesseract,  
-OpenCV
-Background jobs         Celery, Redis           Scheduled checks and
-asynchronous tasks
-Security                OAuth 2.0 / OpenID      Authentication,
-Connect, RBAC, TLS,     authorization, and data
-encryption              protection
-Integrations            Approved bank APIs,     Verification and
-email/SMS gateways,     notifications
-AICTE APIs where  
-available
-Version note: Pin and test exact dependency versions in project
-files before deployment. The table describes a proposed stack; it should
-not be interpreted as proof that every component is already integrated.
-🏗️ High-Level Architecture
-``` text
+
+## 🚩 Problem Statement
+
+Managing institutional FDRs through spreadsheets, physical documents, and manual correspondence can cause:
+
+- Missing or inconsistent financial records.
+- Delays in document verification.
+- Missed FDR maturity and renewal deadlines.
+- Limited visibility into pending approvals.
+- Difficulty maintaining audit trails and document histories.
+
+## 💡 Our Solution
+
+The FDR Management Portal provides a centralized digital platform for document intelligence, verification tracking, automated maturity monitoring, renewal management, and authorized release workflows.
+
+### ✨ Key Features
+
+- **Centralized Repository:** Institution-wise and instrument-wise FDR records.
+- **AI Document Intelligence:** Extract relevant fields from uploaded FDR PDFs and scans.
+- **Automated Validation:** Detect missing fields and inconsistent information.
+- **Human-in-the-Loop Review:** Route uncertain extractions to authorized officials.
+- **Maturity Monitoring:** Track expiry dates and generate advance reminders.
+- **Renewal Management:** Maintain renewal and replacement history.
+- **Release & Refund Workflow:** Track requests, scrutiny, approvals, and status.
+- **Interactive Dashboard:** Monitor active, expiring, matured, renewed, and released instruments.
+- **Secure Access Control:** Role-based permissions and traceable audit logs.
+
+## 🔄 System Workflow
+
+1. Institution uploads an FDR document.
+2. Image preprocessing improves document readability.
+3. AI/OCR extracts candidate FDR metadata.
+4. Schema validation and business rules check the extracted fields.
+5. Discrepancies and low-confidence results are sent for human review.
+6. Authorized officials verify instrument details through approved sources.
+7. Validated records and verification status are stored securely.
+8. The maturity engine schedules alerts and escalations.
+9. Renewal, replacement, and release requests follow controlled workflows.
+10. Dashboards and reports provide administrative visibility.
+
+## 🧠 AI Models & Algorithms
+
+| Model / Algorithm | Functionality |
+|---|---|
+| NVIDIA Nemotron Document Parsing Model | Document layout extraction |
+| Vision-Language Model (VLM) | Intelligent FDR data extraction |
+| PaddleOCR / Tesseract OCR | Scanned text extraction |
+| OpenCV | Document image preprocessing |
+| Pydantic / JSON Schema | Structured data validation |
+| Rule-Based Validation | Business rule enforcement |
+| Isolation Forest (optional) | Anomaly detection |
+| Levenshtein / Jaro-Winkler | Fuzzy record matching |
+| Confidence Thresholding | Uncertainty-based review |
+| Human-in-the-Loop (HITL) | Manual verification |
+| Finite-State Machine (FSM) | FDR lifecycle management |
+| Priority Queue Scheduling | Deadline-based prioritization |
+| Retrieval-Augmented Generation (RAG) | Regulatory document retrieval |
+| Vector Embeddings (optional) | Semantic document search |
+| Cryptographic Hash Chaining | Tamper-evident audit logs |
+
+**Note:** Confirm the exact NVIDIA model, its availability, licensing, and deployment requirements before implementation. AI-based extraction does not independently authenticate an FDR.
+
+## 🧰 Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | React, TypeScript, Tailwind CSS |
+| Backend | Python, FastAPI, Pydantic |
+| Database | PostgreSQL, pgvector (optional) |
+| AI Document Processing | NVIDIA document model, PaddleOCR, OpenCV |
+| Background Jobs | Celery, Redis |
+| Authentication | OAuth 2.0 / OpenID Connect |
+| Authorization | Role-Based Access Control (RBAC) |
+| Security | TLS, encryption at rest, audit logging |
+| Integrations | Authorized bank APIs, email/SMS gateways, AICTE APIs where available |
+
+*Technology versions should be pinned and tested for compatibility before deployment. Components listed here represent the proposed stack unless already implemented.*
+
+## 🏗️ Architecture
+
+```text
 Institution / Authorized Official
               |
        React Web Interface
               |
-          FastAPI
+           FastAPI
               |
-   Authentication + RBAC
+     Authentication + RBAC
               |
-   Document Processing Pipeline
-   (OCR / AI Parsing / Validation)
+   AI Document Processing
+    OCR / VLM / OpenCV
+              |
+   Schema & Rule Validation
               |
        Human Review Queue
               |
        PostgreSQL Database
           /           \
- Maturity & Alerts   Audit Trail
-          \           /
-      Dashboard & Reports
-      
+  Maturity Engine    Audit Trail
+          |
+    Celery + Redis
+          |
+ Notifications & Alerts
+          |
+   Dashboard & Reports
 ```
-🔐 Security & Responsible Verification
-Apply least-privilege role-based access for institutions, reviewers,
-and approving authorities.
-Protect data in transit with TLS and encrypt stored documents and
-backups.
-Validate uploaded files and restrict permitted file types and sizes.
-Keep sensitive documents in controlled object storage rather than
-exposing public links.
-Log submissions, reviews, status changes, and approvals with
-timestamps and actor identity.
-Use approved bank verification mechanisms wherever available.
-Keep human authorization in release/refund decisions and other
-regulated actions.
-Avoid storing unnecessary personal or financial information.
-🧪 Suggested Test Scenarios
-Submit a complete FDR record and document.
-Upload a scan with missing or unreadable fields.
-Detect a mismatch between the submitted amount and extracted amount.
-Trigger a reminder for an FDR nearing maturity.
-Record renewal or replacement and preserve the previous instrument
-history.
-Submit a release request and verify that only authorized roles can
-approve it.
-Confirm that every important status change appears in the audit
-history.
-Verify that one institution cannot access another institution's
-restricted records.
-📊 Expected Impact
-Less repetitive manual tracking
-Better visibility into expiring and overdue instruments
-More consistent FDR metadata
-Faster routing of incomplete records for review
-Traceable renewal and release workflows
-Improved administrative reporting and accountability
-These are intended outcomes. Measure them with prototype tests and
-baseline comparisons before claiming quantified improvements.
-🚀 Getting Started
-Setup instructions depend on the repository implementation. Once the
-application code is available, document:
-Prerequisites and supported runtime versions
-Environment-variable configuration using a `.env.example` file
-Database creation and migrations
-Backend installation and startup commands
-Frontend installation and startup commands
-Test commands and sample/demo data
-Deployment instructions
-Never commit credentials, API keys, production FDRs, or confidential
-institutional documents to GitHub.
-🗺️ Roadmap
-[ ] Institution and instrument registration
-[ ] Secure FDR upload and retrieval
-[ ] Structured metadata extraction
-[ ] Validation and discrepancy review
-[ ] Maturity reminders and escalation rules
-[ ] Renewal/replacement history
-[ ] Authorized release/refund workflow
-[ ] Dashboard and exportable reports
-[ ] Audit and access-control tests
-[ ] Approved external-system integration
-👥 Team
-Team Zorax
-Built as a proposed solution for Problem Statement ID 26265 ---
-Streamline of Security Deposit / FDR Portal.
-⚖️ Disclaimer
-This project is intended to support administrative tracking and review.
-It does not replace official bank confirmation, applicable AICTE
-regulations, or approval by a competent authority. Verification and
-release decisions must follow authorized procedures.
+
+## 🔐 Security & Compliance
+
+- Role-based access and least-privilege permissions.
+- TLS-protected network communication.
+- Encryption for stored documents and backups.
+- Secure file upload and document access controls.
+- Auditable submissions, reviews, and approval actions.
+- Separation of institution-submitted and independently verified data.
+- Authorized human approval for release and refund decisions.
+- Protection of confidential financial and institutional information.
+
+## 🧪 Testing Scenarios
+
+1. Upload a valid FDR document.
+2. Detect missing or unreadable document fields.
+3. Identify mismatches between submitted and extracted values.
+4. Trigger an alert for an approaching maturity date.
+5. Record an FDR renewal or replacement.
+6. Process a release request through authorized approvals.
+7. Verify audit history and role-based access restrictions.
+8. Test unauthorized access to another institution's records.
+
+## 📊 Expected Impact
+
+- Reduced manual tracking effort.
+- Improved financial record consistency.
+- Faster identification of incomplete submissions.
+- Timely renewal and maturity reminders.
+- Better visibility into pending verification and approvals.
+- Improved accountability through audit trails.
+
+These are intended outcomes and should be measured through prototype testing before making quantified performance claims.
+
+## 🚀 Getting Started
+
+Setup instructions will depend on the implementation in this repository.
+
+Document the following as the application is developed:
+
+1. Prerequisites and supported software versions.
+2. Environment variables in a `.env.example` file.
+3. Database setup and migrations.
+4. Backend installation and startup.
+5. Frontend installation and startup.
+6. Test commands and demo data.
+7. Deployment instructions.
+
+Never commit API keys, passwords, production FDRs, or confidential institutional documents to GitHub.
+
+## 🗺️ Project Roadmap
+
+- [ ] Institution registration and authentication.
+- [ ] FDR metadata management.
+- [ ] Secure document upload and retrieval.
+- [ ] AI-assisted metadata extraction.
+- [ ] Validation and discrepancy review.
+- [ ] Maturity alerts and escalation.
+- [ ] Renewal and replacement history.
+- [ ] Release and refund workflow.
+- [ ] Dashboard and administrative reports.
+- [ ] Audit and access-control testing.
+- [ ] Approved external-system integrations.
+
+## 👥 Team
+
+**Team Zorax**
+
+**Problem Statement ID:** 26265  
+**Title:** Streamline of Security Deposit / FDR Portal
+
+## ⚖️ Disclaimer
+
+This platform is intended to support administrative tracking and review. It does not replace official bank verification, applicable AICTE regulations, or approval by the competent authority. Financial instrument verification and release decisions must follow authorized procedures.
+
 ---
-If you find this project useful, consider starring the repository and
-sharing feedback.
+
+⭐ If you find this project useful, consider starring the repository and sharing feedback.
