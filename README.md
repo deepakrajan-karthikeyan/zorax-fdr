@@ -189,7 +189,8 @@ Then open `http://127.0.0.1:5500`. The API endpoints are:
 
 ### Supabase configuration
 
-The project is prepared for the supplied Supabase PostgreSQL instance. Copy
+The project is prepared for the supplied Supabase shared pooler PostgreSQL
+instance. Copy
 `.env.example` to `.env` in your local environment and set
 `SUPABASE_DB_PASSWORD` outside source control. The password is URL-encoded by
 `db/config.js` when a connection configuration is requested.

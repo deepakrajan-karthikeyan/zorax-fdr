@@ -1,7 +1,7 @@
-const SUPABASE_HOST = process.env.SUPABASE_DB_HOST || "db.yzlkhilnnextpmrkdzvk.supabase.co";
+const SUPABASE_HOST = process.env.SUPABASE_DB_HOST || "aws-0-eu-west-1.pooler.supabase.com";
 const SUPABASE_PORT = process.env.SUPABASE_DB_PORT || "5432";
 const SUPABASE_NAME = process.env.SUPABASE_DB_NAME || "postgres";
-const SUPABASE_USER = process.env.SUPABASE_DB_USER || "postgres";
+const SUPABASE_USER = process.env.SUPABASE_DB_USER || "postgres.yzlkhilnnextpmrkdzvk";
 
 function getDatabaseConfig() {
   const password = process.env.SUPABASE_DB_PASSWORD;
