@@ -2,6 +2,7 @@ const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
 const { URL } = require("node:url");
+const { Client } = require("pg");
 const { getDatabaseConfig } = require("../db/config");
 
 const root = path.resolve(__dirname, "..");
@@ -41,24 +42,45 @@ function serveStatic(request, response) {
   });
 }
 
-const server = http.createServer((request, response) => {
+async function databaseStatus() {
+  const database = getDatabaseConfig();
+  if (!database.configured) {
+    return { provider: "supabase-postgresql", host: database.host, configured: false, connected: false };
+  }
+  const client = new Client({
+    connectionString: database.connectionString,
+    ssl: { rejectUnauthorized: false },
+    connectionTimeoutMillis: 5000
+  });
+  try {
+    await client.connect();
+    await client.query("select 1");
+    return { provider: "supabase-postgresql", host: database.host, configured: true, connected: true };
+  } catch (error) {
+    return {
+      provider: "supabase-postgresql",
+      host: database.host,
+      configured: true,
+      connected: false,
+      error: error.code || "connection_failed"
+    };
+  } finally {
+    await client.end().catch(() => {});
+  }
+}
+
+const server = http.createServer(async (request, response) => {
   if (request.method !== "GET") {
     sendJson(response, 405, { error: "Only GET is available in this demo API" });
     return;
   }
   const url = new URL(request.url, "http://localhost");
   if (url.pathname === "/api/health") {
-    const database = getDatabaseConfig();
     sendJson(response, 200, {
       service: "zorax-api",
       environment: process.env.ZORAX_ENV || "demo",
       extractionMode: process.env.AI_EXTRACTION_MODE || "demo",
-      database: {
-        provider: "supabase-postgresql",
-        host: database.host,
-        configured: database.configured,
-        connected: false
-      },
+      database: await databaseStatus(),
       status: "ok"
     });
     return;

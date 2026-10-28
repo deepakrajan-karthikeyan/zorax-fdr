@@ -194,11 +194,10 @@ The project is prepared for the supplied Supabase PostgreSQL instance. Copy
 `SUPABASE_DB_PASSWORD` outside source control. The password is URL-encoded by
 `db/config.js` when a connection configuration is requested.
 
-The current Node demo server intentionally does not open a database connection;
-`GET /api/health` reports `configured: true` only when the password is present
-and always reports `connected: false` until a PostgreSQL client and migration
-runner are explicitly added. Apply [db/schema.sql](./db/schema.sql) through a
-trusted migration workflow before enabling persistence.
+The Node server uses the `pg` client for a lightweight connection check.
+`GET /api/health` reports the live `configured` and `connected` state without
+returning credentials. Apply [db/schema.sql](./db/schema.sql) through a trusted
+migration workflow before enabling application persistence.
 
 Never put the real password in `.env.example`, frontend code, Git history, or
 the public repository. If the password contains special characters, provide it
