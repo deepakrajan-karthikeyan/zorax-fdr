@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZORAX | Security Deposit & FDR Management</title>
+  <meta name="description" content="ZORAX security deposit and FDR management portal prototype">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="login-screen" id="loginScreen">
+    <div class="login-visual">
+      <div class="login-brand"><div class="brand-mark">Z</div><strong>ZORAX</strong></div>
+      <div class="visual-copy">
+        <span class="eyebrow">REGULATION BUREAU · DIGITAL WORKSPACE</span>
+        <h1>One secure view<br>of every deposit.</h1>
+        <p>Manage institutional security deposits and fixed deposit receipts with clarity, control and complete traceability.</p>
+        <div class="visual-stats"><div><strong>₹ 8.42 Cr</strong><span>Recorded value</span></div><div><strong>36</strong><span>Active instruments</span></div><div><strong>99.8%</strong><span>Data integrity</span></div></div>
+      </div>
+      <div class="login-visual-footer"><span>◇ Protected workspace</span><span>Problem statement 26265</span></div>
+    </div>
+    <div class="login-panel">
+      <div class="login-top"><span>Need help?</span><button class="login-help">Help center ↗</button></div>
+      <div class="login-form-wrap">
+        <div class="mobile-login-brand"><div class="brand-mark">Z</div><strong>ZORAX</strong></div>
+        <span class="eyebrow blue-eyebrow">WELCOME BACK</span>
+        <h2>Sign in to your workspace</h2>
+        <p class="login-subtitle">Use your authorized ZORAX account to continue.</p>
+        <form id="loginForm">
+          <div class="login-field"><label for="email">Work email</label><input id="email" type="email" placeholder="you@organization.gov.in" autocomplete="username" required></div>
+          <div class="login-field"><div class="field-label-row"><label for="password">Password</label><button type="button" id="forgotPassword">Forgot password?</button></div><div class="password-input"><input id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required><button type="button" id="togglePassword" aria-label="Show password">◉</button></div></div>
+          <div class="login-options"><label><input id="rememberMe" type="checkbox"> <span>Remember this device</span></label><span class="session-note">Session expires after 30 min</span></div>
+          <button class="login-submit" type="submit">Sign in securely <span>→</span></button>
+          <div class="demo-login"><span class="demo-line"></span><span>DEMO ACCESS</span><span class="demo-line"></span><button type="button" id="demoLogin">Use demo credentials</button><small>admin@zorax.demo · Any password</small></div>
+        </form>
+        <div class="login-security"><span>◇</span><div><strong>Your data is protected</strong><p>Encrypted in transit and access-controlled by role.</p></div></div>
+      </div>
+      <div class="login-footer"><span>© 2026 Team Zorax</span><span>Privacy · Terms</span></div>
+    </div>
+  </div>
+  <section class="hero-screen" id="heroScreen" hidden>
+    <nav class="hero-nav">
+      <div class="login-brand"><div class="brand-mark">Z</div><strong>ZORAX</strong></div>
+      <div class="hero-nav-links"><a href="#capabilities">Capabilities</a><a href="#security">Security</a><a href="#about">About the portal</a><button class="btn btn-outline" id="heroDashboard">Open workspace →</button></div>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-copy">
+        <span class="eyebrow blue-eyebrow">WELCOME TO THE ZORAX WORKSPACE</span>
+        <h1>Bring every deposit<br><em>into focus.</em></h1>
+        <p>ZORAX gives regulation teams a single, secure view of institutional security deposits and fixed deposit receipts — from submission to verification, maturity and release.</p>
+        <div class="hero-actions"><button class="btn btn-primary hero-cta" id="heroDashboardPrimary">Enter your workspace <span>→</span></button><button class="hero-text-link" id="heroExplore">Explore capabilities ↓</button></div>
+        <div class="hero-trust"><span>◇ Role-based access</span><span>◷ Full audit history</span><span>✓ Demo data protected</span></div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+        <div class="hero-dashboard-card"><div class="mini-top"><span><i></i> ZORAX overview</span><span>Today · 28 Mar 2026</span></div><div class="mini-title">Good morning, Ananya <span>✦</span></div><div class="mini-kpis"><div><small>Active instruments</small><strong>36</strong><i class="mini-green">↑ 8.4%</i></div><div><small>Deposit value</small><strong>₹ 8.42 Cr</strong><i class="mini-blue">Live value</i></div></div><div class="mini-chart"><div class="mini-bars">${[34,53,43,69,55,82,63].map((h,i)=>`<b style="height:${h}%"><i></i></b>`).join("")}</div><span>Submission activity · last 6 months</span></div><div class="mini-alert"><i>!</i><div><strong>12 items need attention</strong><small>4 verification cases · 5 renewals · 3 approvals</small></div><span>→</span></div></div>
+      </div>
+    </div>
+    <div class="hero-bottom" id="capabilities"><span>BUILT FOR ACCOUNTABILITY</span><div><strong>Submission</strong><small>Capture every instrument securely</small></div><div><strong>Verification</strong><small>Resolve discrepancies with evidence</small></div><div><strong>Monitoring</strong><small>Stay ahead of every maturity</small></div><div><strong>Traceability</strong><small>Keep a complete audit trail</small></div></div>
+  </section>
+  <div class="app-shell" id="appShell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">Z</div>
+        <div><strong>ZORAX</strong><span>Regulation Bureau</span></div>
+      </div>
+      <div class="demo-pill"><span class="pulse-dot"></span> DEMO ENVIRONMENT</div>
+      <nav class="nav" aria-label="Primary navigation">
+        <div class="nav-label">Workspace</div>
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">⌂</span> Dashboard</button>
+        <button class="nav-item" data-view="institutions"><span class="nav-icon">▦</span> Institutions <span class="nav-count">8</span></button>
+        <button class="nav-item" data-view="fdrs"><span class="nav-icon">▤</span> FDR Repository</button>
+        <button class="nav-item" data-view="verification"><span class="nav-icon">✓</span> Verification <span class="nav-count alert">12</span></button>
+        <button class="nav-item" data-view="renewals"><span class="nav-icon">↻</span> Renewals <span class="nav-count">5</span></button>
+        <button class="nav-item" data-view="release"><span class="nav-icon">⇥</span> Release requests <span class="nav-count alert">4</span></button>
+        <div class="nav-label separated">Insights</div>
+        <button class="nav-item" data-view="reports"><span class="nav-icon">▥</span> Reports & analytics</button>
+        <button class="nav-item" data-view="notifications"><span class="nav-icon">◉</span> Notifications <span class="nav-count alert">7</span></button>
+        <div class="nav-label separated">Administration</div>
+        <button class="nav-item" data-view="audit"><span class="nav-icon">◴</span> Audit logs</button>
+        <button class="nav-item" data-view="users"><span class="nav-icon">♙</span> Users & roles</button>
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="security-card"><span class="shield">◇</span><div><strong>Secure workspace</strong><small>Protected with RBAC</small></div></div>
+        <div class="user-mini"><div class="avatar navy">AM</div><div><strong>Ananya Mehta</strong><small>System Administrator</small></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuToggle">☰</button>
+        <div class="crumbs"><span>Regulation Bureau</span><b>/</b><strong id="crumbCurrent">Dashboard</strong></div>
+        <div class="top-actions">
+          <label class="global-search"><span>⌕</span><input id="globalSearch" placeholder="Search anything..." aria-label="Global search"><kbd>⌘ K</kbd></label>
+          <button class="icon-button" id="themeToggle" title="Toggle theme">☼</button>
+          <button class="icon-button notification-button" data-view="notifications" title="Notifications">♢<i></i></button>
+          <button class="help-button">? <span>Help center</span></button>
+          <div class="profile-button"><div class="avatar">AM</div><span>Ananya Mehta</span><b>⌄</b></div>
+        </div>
+      </header>
+      <div class="content" id="content"></div>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose">×</button>
+      <div id="modalBody"></div>
+    </section>
+  </div>
+  <div class="toast-region" id="toastRegion"></div>
+  <script src="app.js"></script>
+</body>
+</html>
